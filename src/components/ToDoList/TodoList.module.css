@@ -8,7 +8,7 @@
   justify-content: space-between;
   flex-direction: row;
   margin-top: 6px;
-  color: rgb(179, 179, 179);
+  color: rgb(121, 120, 120);
   padding: 6px;
   background-color: #f5f5f5;
 }
@@ -17,7 +17,7 @@
   border-radius: 6px;
 }
 .close {
-  color: grey;
+  color: rgb(182, 180, 180);
   text-decoration: line-through;
 }
 .filter {

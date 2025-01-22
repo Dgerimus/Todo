@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Button, FormControl } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import {
   MdOutlineRadioButtonUnchecked,
   MdCheckCircle,
   MdSaveAs,
   MdEdit,
   MdDelete,
-  MdCreate,
 } from "react-icons/md";
 import style from "./TodoList.module.css";
 
@@ -64,7 +63,7 @@ function TodoList({ todo, setTodo }) {
             class="btn-group"
             role="group"
             aria-label="Простой пример"
-            className={style.btn}
+            className={style.grbtns}
           >
             <button
               type="button"
