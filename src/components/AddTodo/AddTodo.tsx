@@ -3,8 +3,19 @@ import { v4 as uuidv4 } from "uuid";
 import { Row, Col, Button, FormControl } from "react-bootstrap";
 import style from "./AddTodoForm.module.css";
 
-function AddTodo({ todo, setTodo }) {
-  const [value, setValue] = useState("");
+interface Todo {
+  id: string;
+  title: string;
+  status: any;
+}
+
+interface AddTodoProps {
+  todo: Todo[];
+  setTodo: React.Dispatch<React.SetStateAction<Todo[]>>;
+}
+
+const AddTodo: React.FC<AddTodoProps> = ({ todo, setTodo }) => {
+  const [value, setValue] = useState<string>("");
 
   function saveTodo() {
     if (value) {
@@ -24,16 +35,16 @@ function AddTodo({ todo, setTodo }) {
     <Row>
       <Col className={style.addTodoForm}>
         <FormControl
-          placeholder="Введите задачу"
+          placeholder="What needs to be done?"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         ></FormControl>
         <Button onClick={saveTodo} className={style.btn1}>
-          Создать
+          Сreate
         </Button>
       </Col>
     </Row>
   );
-}
+};
 
 export default AddTodo;

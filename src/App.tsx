@@ -7,20 +7,26 @@ import { v4 as uuid } from "uuid";
 import { Container } from "react-bootstrap";
 import "./index.css";
 
-function App() {
+interface TodoItem {
+  id: string;
+  title: string;
+  status: boolean;
+}
+
+const App: React.FC = () => {
   const [todo, setTodo] = useState([
     {
-      id: 1,
+      id: uuid(),
       title: "first todo",
       status: true,
     },
     {
-      id: 2,
+      id: uuid(),
       title: "second todo",
       status: false,
     },
     {
-      id: 3,
+      id: uuid(),
       title: "third todo",
       status: true,
     },
@@ -33,6 +39,6 @@ function App() {
       <TodoList todo={todo} setTodo={setTodo} />
     </Container>
   );
-}
+};
 
 export default App;

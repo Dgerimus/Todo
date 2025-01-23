@@ -14,7 +14,7 @@
 }
 .listItems:hover {
   background-color: #c4c1c1;
-  border-radius: 6px;
+  border-radius: 6px !important;
 }
 .close {
   color: rgb(182, 180, 180);
@@ -25,6 +25,10 @@
   display: flex;
   justify-content: center !important;
 }
-#grbtns {
-  border-radius: 0;
+
+span {
+  font-family: "Arial", sans-serif;
+
+  flex-grow: 1;
+  margin-right: 15px;
 }

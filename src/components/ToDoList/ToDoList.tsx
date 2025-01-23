@@ -9,82 +9,108 @@ import {
 } from "react-icons/md";
 import style from "./TodoList.module.css";
 
-function TodoList({ todo, setTodo }) {
-  const [edit, setEdit] = useState(null);
-  const [value, setValue] = useState("");
-  const [filtered, setFiltered] = useState(todo);
+interface TodoItem {
+  id: string;
+  title: string;
+  status: boolean;
+}
+
+interface TodoListProps {
+  todo: TodoItem[];
+  setTodo: React.Dispatch<React.SetStateAction<TodoItem[]>>;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
+  const [edit, setEdit] = useState<string | null>(null);
+  const [value, setValue] = useState<string>("");
+  const [filtered, setFiltered] = useState<TodoItem[]>(todo);
 
   useEffect(() => {
     setFiltered(todo);
   }, [todo]);
 
-  function todoFilter(status) {
+  const activeTasksCount = todo.filter((item) => !item.status).length;
+
+  const todoFilter = (status: boolean | "all") => {
     if (status === "all") {
       setFiltered(todo);
     } else {
-      let newTodo = [...todo].filter((item) => item.status === status);
+      const newTodo = todo.filter((item) => item.status === status);
       setFiltered(newTodo);
     }
-  }
+  };
 
-  function deleteTodo(id) {
-    let newTodo = [...todo].filter((item) => item.id != id);
+  const deleteTodo = (id: string) => {
+    const newTodo = todo.filter((item) => item.id !== id);
     setTodo(newTodo);
-  }
-  function statusTodo(id) {
-    let newTodo = [...todo].filter((item) => {
-      if (item.id == id) {
-        item.status = !item.status;
+  };
+
+  const deleteCompletedTasks = () => {
+    const newTodo = todo.filter((item) => !item.status);
+    setTodo(newTodo);
+  };
+
+  const statusTodo = (id: string) => {
+    const newTodo = todo.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: !item.status };
       }
       return item;
     });
     setTodo(newTodo);
-  }
-  function editTodo(id, title) {
+  };
+  const editTodo = (id: string, title: string) => {
     setEdit(id);
     setValue(title);
-  }
-  function saveTodo(id) {
-    let newTodo = [...todo].map((item) => {
-      if (item.id == id) {
-        item.title = value;
+  };
+  const saveTodo = (id: string) => {
+    const newTodo = todo.map((item) => {
+      if (item.id === id) {
+        return { ...item, title: value };
       }
       return item;
     });
     setTodo(newTodo);
     setEdit(null);
-  }
+  };
 
   return (
     <div>
       <Row>
         <Col className={style.filter}>
           <div
-            class="btn-group"
+            className={`d-flex align-items-center justify-content-between ${style.grbtns}`}
             role="group"
             aria-label="Простой пример"
-            className={style.grbtns}
           >
+            <span className="mr-3">{activeTasksCount} items left</span>
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={() => todoFilter("all")}
             >
-              Все
+              All
             </button>
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={() => todoFilter(false)}
             >
-              Открытые
+              Active
             </button>
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={() => todoFilter(true)}
             >
-              Закрытые
+              Completed
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={deleteCompletedTasks}
+            >
+              Clear completed
             </button>
           </div>
         </Col>
@@ -99,7 +125,7 @@ function TodoList({ todo, setTodo }) {
             <div>
               <Button onClick={() => statusTodo(item.id)} className={style.btn}>
                 {item.status == true ? (
-                  <MdCheckCircle size="2em" color="wite" />
+                  <MdCheckCircle size="2em" />
                 ) : (
                   <MdOutlineRadioButtonUnchecked size="2em" />
                 )}
@@ -111,7 +137,7 @@ function TodoList({ todo, setTodo }) {
             </div>
           )}
 
-          {edit == item.id ? (
+          {edit === item.id ? (
             <div>
               <Button onClick={() => saveTodo(item.id)}>
                 <MdSaveAs />
@@ -134,6 +160,6 @@ function TodoList({ todo, setTodo }) {
       ))}
     </div>
   );
-}
+};
 
 export default TodoList;
