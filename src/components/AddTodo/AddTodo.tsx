@@ -39,7 +39,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ todo, setTodo }) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         ></FormControl>
-        <Button onClick={saveTodo} className={style.btn1}>
+        <Button onClick={saveTodo} className={style.btn1} aria-label="create">
           Сreate
         </Button>
       </Col>

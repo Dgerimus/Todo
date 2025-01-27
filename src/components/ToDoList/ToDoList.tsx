@@ -88,6 +88,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
               type="button"
               className="btn btn-primary"
               onClick={() => todoFilter("all")}
+              aria-label="All"
             >
               All
             </button>
@@ -95,6 +96,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
               type="button"
               className="btn btn-primary"
               onClick={() => todoFilter(false)}
+              aria-label="Active"
             >
               Active
             </button>
@@ -102,6 +104,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
               type="button"
               className="btn btn-primary"
               onClick={() => todoFilter(true)}
+              aria-label="Completed"
             >
               Completed
             </button>
@@ -109,6 +112,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
               type="button"
               className="btn btn-secondary"
               onClick={deleteCompletedTasks}
+              aria-label="Clear completed tasks"
             >
               Clear completed
             </button>
@@ -123,7 +127,11 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
             </div>
           ) : (
             <div>
-              <Button onClick={() => statusTodo(item.id)} className={style.btn}>
+              <Button
+                onClick={() => statusTodo(item.id)}
+                className={style.btn}
+                aria-label={`statusChange-${item.id}`}
+              >
                 {item.status == true ? (
                   <MdCheckCircle size="2em" />
                 ) : (
@@ -139,7 +147,7 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
 
           {edit === item.id ? (
             <div>
-              <Button onClick={() => saveTodo(item.id)}>
+              <Button onClick={() => saveTodo(item.id)} aria-label="save">
                 <MdSaveAs />
               </Button>
             </div>
@@ -148,10 +156,11 @@ const TodoList: React.FC<TodoListProps> = ({ todo, setTodo }) => {
               <Button
                 onClick={() => editTodo(item.id, item.title)}
                 className={style.btn}
+                aria-label={`edit-${item.id}`}
               >
                 <MdEdit />
               </Button>
-              <Button onClick={() => deleteTodo(item.id)}>
+              <Button onClick={() => deleteTodo(item.id)} aria-label="delete">
                 <MdDelete />
               </Button>
             </div>
