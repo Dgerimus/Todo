@@ -1,3 +1,5 @@
+Тестовое задание https://docs.google.com/document/d/1X9zMnAAU9vvEzdYtSEeeram8Kur5o-py5ChKlK5TIa8/edit?tab=t.0
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
